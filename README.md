@@ -13,8 +13,8 @@ This Spring Boot application utilizes Java 17 and integrates seamlessly with a P
 1. **Clone the Repository**
 
     ```bash
-    git clone <repository-url>
-    cd <project-directory>
+    git clone https://github.com/dvanauken/teamviewr
+    cd teamviewr
     ```
 ## Setting up the Database
 
