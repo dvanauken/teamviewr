@@ -1,0 +1,38 @@
+version: '3.8'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ##- SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/teamviewer
+      - SPRING_DATASOURCE_USERNAME=teamviewer_user
+      - SPRING_DATASOURCE_PASSWORD=password123
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=teamviewer
+      - POSTGRES_USER=teamviewer_user
+      - POSTGRES_PASSWORD=password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  db-data:
